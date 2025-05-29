@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS default_blocks;
+DROP TABLE IF EXISTS sections;
+DROP TABLE IF EXISTS languages;

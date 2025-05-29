@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"fmt"
+	"github.com/Nikita-Kolbin/urfu-guide/internal/app/model"
 
 	"net/http"
 
@@ -14,7 +15,11 @@ import (
 )
 
 type service interface {
-	//
+	GetSections(ctx context.Context) ([]*model.Language, error)
+}
+
+type API struct {
+	srv service
 }
 
 func New(_ context.Context, srv service, address string) http.Handler {
@@ -37,8 +42,11 @@ func New(_ context.Context, srv service, address string) http.Handler {
 		httpSwagger.URL(fmt.Sprintf("%s/swagger/doc.json", address)),
 	))
 
+	api := API{srv: srv}
+
 	// handlers
-	router.Get("/api/health", Health(srv))
+	router.Get("/api/health", api.Health)
+	router.Get("/api/v1/sections", api.GetSections)
 
 	return router
 }

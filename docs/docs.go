@@ -42,9 +42,63 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/v1/sections": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "public"
+                ],
+                "summary": "check health",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Language"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/model.ErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "model.DefaultBlock": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "section_id": {
+                    "type": "integer"
+                },
+                "timetable": {
+                    "type": "string"
+                }
+            }
+        },
         "model.ErrorResponse": {
             "type": "object",
             "properties": {
@@ -58,6 +112,43 @@ const docTemplate = `{
             "properties": {
                 "success": {
                     "type": "boolean"
+                }
+            }
+        },
+        "model.Language": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "sections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Section"
+                    }
+                }
+            }
+        },
+        "model.Section": {
+            "type": "object",
+            "properties": {
+                "content_type": {
+                    "type": "string"
+                },
+                "default_block": {
+                    "$ref": "#/definitions/model.DefaultBlock"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "languageCode": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
                 }
             }
         }

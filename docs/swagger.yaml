@@ -1,5 +1,20 @@
 basePath: /api
 definitions:
+  model.DefaultBlock:
+    properties:
+      address:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      phone:
+        type: string
+      section_id:
+        type: integer
+      timetable:
+        type: string
+    type: object
   model.ErrorResponse:
     properties:
       error:
@@ -9,6 +24,30 @@ definitions:
     properties:
       success:
         type: boolean
+    type: object
+  model.Language:
+    properties:
+      code:
+        type: string
+      sections:
+        items:
+          $ref: '#/definitions/model.Section'
+        type: array
+    type: object
+  model.Section:
+    properties:
+      content_type:
+        type: string
+      default_block:
+        $ref: '#/definitions/model.DefaultBlock'
+      id:
+        type: integer
+      languageCode:
+        type: string
+      position:
+        type: integer
+      title:
+        type: string
     type: object
 host: localhost:8082
 info:
@@ -34,6 +73,26 @@ paths:
       summary: check health
       tags:
       - admin
+  /v1/sections:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Language'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: check health
+      tags:
+      - public
 securityDefinitions:
   ApiKeyAuth:
     in: header

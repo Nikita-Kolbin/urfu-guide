@@ -14,9 +14,7 @@ import (
 // @Success  200   {object}   model.HealthResponse
 // @Failure  500   {object}   model.ErrorResponse
 // @Router   /health [get]
-func Health(_ service) func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		render.Status(r, http.StatusOK)
-		render.JSON(w, r, model.HealthResponse{Success: true})
-	}
+func (a *API) Health(w http.ResponseWriter, r *http.Request) {
+	render.Status(r, http.StatusOK)
+	render.JSON(w, r, model.HealthResponse{Success: true})
 }

@@ -10,7 +10,9 @@ import (
 	"time"
 )
 
-const timeBetweenPings = 5 * time.Second
+const (
+	timeBetweenPings = 5 * time.Second
+)
 
 type Repository struct {
 	conn    *sqlx.DB
