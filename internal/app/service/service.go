@@ -2,12 +2,15 @@ package service
 
 import (
 	"context"
+	"github.com/Nikita-Kolbin/urfu-guide/internal/app/model"
 	"io"
 	"time"
 )
 
 type repository interface {
-	// repo
+	GetLanguages(ctx context.Context) (model.LanguageList, error)
+	GetSections(ctx context.Context, languageCode string) (model.SectionList, error)
+	GetDefaultBlock(ctx context.Context, sectionID int) (*model.DefaultBlock, error)
 }
 
 type objectStorage interface {

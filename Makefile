@@ -7,6 +7,10 @@ build: swagger
 run: swagger
 	go run ./cmd/main.go
 
+# migrate
+# migrate create -ext sql -dir migrations -seq <name>
+# migrate -path migrations -database "postgres://user:pass@localhost:5432/dbname?sslmode=disable" up
+
 compose_up:
 	docker compose --env-file ./.env up -d
 
