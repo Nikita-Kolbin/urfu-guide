@@ -20,6 +20,8 @@ type service interface {
 
 	UploadFile(ctx context.Context, reader io.Reader, size int64, contentType string) (model.UploadFileResponse, error)
 	GetFile(ctx context.Context, objectId string) (io.Reader, string, error)
+
+	GetVersion(ctx context.Context) (model.Version, error)
 }
 
 type API struct {
@@ -53,6 +55,7 @@ func New(_ context.Context, srv service, address string) http.Handler {
 	router.Get("/api/v1/sections", api.GetSections)
 	router.Post("/api/file/upload", api.UploadFile)
 	router.Get("/api/file/{file-id}", api.GetFile)
+	router.Get("/api/v1/version", api.GetVersion)
 
 	return router
 }

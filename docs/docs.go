@@ -143,7 +143,7 @@ const docTemplate = `{
                 "tags": [
                     "public"
                 ],
-                "summary": "check health",
+                "summary": "get all sections",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -152,6 +152,34 @@ const docTemplate = `{
                             "items": {
                                 "$ref": "#/definitions/model.Language"
                             }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/model.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/version": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "public"
+                ],
+                "summary": "get version",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Version"
                         }
                     },
                     "500": {
@@ -218,6 +246,14 @@ const docTemplate = `{
                 },
                 "url": {
                     "type": "string"
+                }
+            }
+        },
+        "model.Version": {
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "integer"
                 }
             }
         }

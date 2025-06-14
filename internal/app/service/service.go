@@ -17,6 +17,8 @@ type repository interface {
 	GetDropDownBlock(ctx context.Context, sectionID int) (*model.DropDownBlock, error)
 	GetDropDownBlockList(ctx context.Context, sectionID int) (model.DropDownBlockList, error)
 	GetDropDownElements(ctx context.Context, blockID int) (model.DropDownElementList, error)
+
+	GetVersion(ctx context.Context) (model.Version, error)
 }
 
 type objectStorage interface {
