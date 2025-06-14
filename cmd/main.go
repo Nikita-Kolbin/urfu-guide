@@ -16,7 +16,7 @@ import (
 // @title           URFU-Guide
 // @version         1.0
 
-// @host      localhost:8082
+// @host      158.160.182.170:8082
 // @BasePath  /api
 
 // @securityDefinitions.apikey ApiKeyAuth

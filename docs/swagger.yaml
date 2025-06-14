@@ -36,7 +36,7 @@ definitions:
       url:
         type: string
     type: object
-host: localhost:8082
+host: 158.160.182.170:8082
 info:
   contact: {}
   title: URFU-Guide

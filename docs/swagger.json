@@ -5,7 +5,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "localhost:8082",
+    "host": "158.160.182.170:8082",
     "basePath": "/api",
     "paths": {
         "/file/upload": {
