@@ -55,7 +55,7 @@ func initMain(ctx context.Context) error {
 	}
 	defer cache.Close()
 
-	srv := service.New(repo, stg, cache, cfg.JWTSecret)
+	srv := service.New(repo, stg, cache, cfg.JWTSecret, cfg.ServerHostPort)
 
 	r := api.New(ctx, srv, cfg.Listener.GetHostPort())
 

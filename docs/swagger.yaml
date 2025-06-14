@@ -29,12 +29,77 @@ definitions:
       title:
         type: string
     type: object
+  model.UploadFileResponse:
+    properties:
+      id:
+        type: string
+      url:
+        type: string
+    type: object
 host: localhost:8082
 info:
   contact: {}
   title: URFU-Guide
   version: "1.0"
 paths:
+  /file/{file-id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: file id
+        in: path
+        name: file-id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: integer
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Get file by id
+      tags:
+      - file
+  /file/upload:
+    post:
+      consumes:
+      - image/jpeg
+      parameters:
+      - description: file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.UploadFileResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: Upload file
+      tags:
+      - file
   /health:
     get:
       consumes:
