@@ -10,7 +10,13 @@ import (
 type repository interface {
 	GetLanguages(ctx context.Context) (model.LanguageList, error)
 	GetSections(ctx context.Context, languageCode string) (model.SectionList, error)
+
 	GetDefaultBlock(ctx context.Context, sectionID int) (*model.DefaultBlock, error)
+	GetDefaultBlockList(ctx context.Context, sectionID int) (model.DefaultBlockList, error)
+
+	GetDropDownBlock(ctx context.Context, sectionID int) (*model.DropDownBlock, error)
+	GetDropDownBlockList(ctx context.Context, sectionID int) (model.DropDownBlockList, error)
+	GetDropDownElements(ctx context.Context, blockID int) (model.DropDownElementList, error)
 }
 
 type objectStorage interface {
