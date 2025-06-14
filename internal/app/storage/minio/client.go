@@ -3,6 +3,7 @@ package minio
 import (
 	"context"
 	"fmt"
+	"github.com/Nikita-Kolbin/urfu-guide/internal/app/model"
 	"github.com/google/uuid"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
@@ -79,7 +80,7 @@ func generateObjectName() string {
 
 func initBuckets(ctx context.Context, cli *minio.Client) error {
 	buckets := []string{
-		// model.ImageBucketName, // TODO: добавить 2 бакета для видео и картинок
+		model.DefaultBucketName,
 	}
 
 	for _, bucket := range buckets {

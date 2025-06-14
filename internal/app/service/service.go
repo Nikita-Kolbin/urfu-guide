@@ -30,17 +30,19 @@ type cache interface {
 }
 
 type Service struct {
-	jwtSecret string
-	repo      repository
-	storage   objectStorage
-	cache     cache
+	jwtSecret      string
+	serverHostPort string
+	repo           repository
+	storage        objectStorage
+	cache          cache
 }
 
-func New(repo repository, storage objectStorage, cache cache, jwtSecret string) *Service {
+func New(repo repository, storage objectStorage, cache cache, jwtSecret, serverHostPort string) *Service {
 	return &Service{
-		jwtSecret: jwtSecret,
-		repo:      repo,
-		storage:   storage,
-		cache:     cache,
+		jwtSecret:      jwtSecret,
+		serverHostPort: serverHostPort,
+		repo:           repo,
+		storage:        storage,
+		cache:          cache,
 	}
 }

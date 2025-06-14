@@ -11,14 +11,14 @@ import (
 const ENVInDocker = "IN_DOCKER"
 
 type Config struct {
-	Env       string `env:"JWT_SECRET" envDefault:"dev"`
-	JWTSecret string `env:"JWT_SECRET"`
+	Env            string `env:"JWT_SECRET" envDefault:"dev"`
+	JWTSecret      string `env:"JWT_SECRET"`
+	ServerHostPort string `env:"SERVER_HOST_PORT" envDefault:"localhost"`
 
-	Listener     ListenerConfig     `envPrefix:"LISTENER_"`
-	Postgres     PostgresConfig     `envPrefix:"POSTGRES_"`
-	Minio        MinioConfig        `envPrefix:"MINIO_"`
-	Redis        RedisConfig        `envPrefix:"REDIS_"`
-	Notification NotificationConfig `envPrefix:"NOTIFICATION_"`
+	Listener ListenerConfig `envPrefix:"LISTENER_"`
+	Postgres PostgresConfig `envPrefix:"POSTGRES_"`
+	Minio    MinioConfig    `envPrefix:"MINIO_"`
+	Redis    RedisConfig    `envPrefix:"REDIS_"`
 }
 
 type ListenerConfig struct {
@@ -50,10 +50,6 @@ type MinioConfig struct {
 type RedisConfig struct {
 	HostPort string `env:"HOST_PORT,required"`
 	Password string `env:"PASSWORD,required"`
-}
-
-type NotificationConfig struct {
-	HostPort string `env:"HOST_PORT,required"`
 }
 
 func New() (*Config, error) {

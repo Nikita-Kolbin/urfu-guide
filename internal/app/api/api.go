@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/Nikita-Kolbin/urfu-guide/internal/app/model"
+	"io"
 
 	"net/http"
 
@@ -16,6 +17,9 @@ import (
 
 type service interface {
 	GetSections(ctx context.Context) ([]*model.Language, error)
+
+	UploadFile(ctx context.Context, reader io.Reader, size int64, contentType string) (model.UploadFileResponse, error)
+	GetFile(ctx context.Context, objectId string) (io.Reader, string, error)
 }
 
 type API struct {
@@ -47,6 +51,8 @@ func New(_ context.Context, srv service, address string) http.Handler {
 	// handlers
 	router.Get("/api/health", api.Health)
 	router.Get("/api/v1/sections", api.GetSections)
+	router.Post("/api/file/upload", api.UploadFile)
+	router.Get("/api/file/{file-id}", api.GetFile)
 
 	return router
 }

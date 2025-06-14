@@ -1,6 +1,8 @@
 package model
 
-const ImageBucketName = "image-bucket"
+const (
+	DefaultBucketName = "default-bucket"
+)
 
 const (
 	DefaultBlockContent          = "default_block"
