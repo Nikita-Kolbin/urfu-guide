@@ -7,26 +7,26 @@ import (
 	"net/http"
 )
 
-// GetSections godoc
-// @Summary  get all sections
+// GetVersion godoc
+// @Summary  get version
 // @Tags     public
 // @Accept   json
 // @Produce  json
-// @Success  200   {object}   model.LanguageList
+// @Success  200   {object}   model.Version
 // @Failure  500   {object}   model.ErrorResponse
-// @Router   /v1/sections [get]
-func (a *API) GetSections(w http.ResponseWriter, r *http.Request) {
+// @Router   /v1/version [get]
+func (a *API) GetVersion(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	res, err := a.srv.GetSections(ctx)
+	res, err := a.srv.GetVersion(ctx)
 	if err != nil {
-		logger.Error(ctx, "[GetSections] failed to get sections", "err", err)
+		logger.Error(ctx, "[GetVersion] failed to get version", "err", err)
 		render.Status(r, http.StatusInternalServerError)
-		render.JSON(w, r, model.NewErrResp("failed to get sections"))
+		render.JSON(w, r, model.NewErrResp("failed to get version"))
 		return
 	}
 
-	logger.Info(ctx, "[GetSections] sections given success")
+	logger.Info(ctx, "[GetVersion] version given success")
 
 	render.Status(r, http.StatusOK)
 	render.JSON(w, r, res)

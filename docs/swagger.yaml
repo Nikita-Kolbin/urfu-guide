@@ -36,6 +36,11 @@ definitions:
       url:
         type: string
     type: object
+  model.Version:
+    properties:
+      version:
+        type: integer
+    type: object
 host: localhost:8082
 info:
   contact: {}
@@ -135,7 +140,25 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/model.ErrorResponse'
-      summary: check health
+      summary: get all sections
+      tags:
+      - public
+  /v1/version:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Version'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: get version
       tags:
       - public
 securityDefinitions:

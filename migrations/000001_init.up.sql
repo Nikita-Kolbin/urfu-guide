@@ -43,6 +43,41 @@ CREATE TABLE drop_down_elements (
 
 
 
+-- Версионирование
+CREATE TABLE version (
+    version INT NOT NULL DEFAULT 1
+);
+INSERT INTO version (version) VALUES (1);
+
+-- Функция, увеличивающая версию для триггера
+CREATE OR REPLACE FUNCTION bump_version()
+    RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE version SET version = version + 1;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Триггеры на все таблицы
+CREATE TRIGGER trigger_languages_version
+    AFTER INSERT OR UPDATE OR DELETE ON languages
+    FOR EACH STATEMENT EXECUTE FUNCTION bump_version();
+CREATE TRIGGER trigger_sections_version
+    AFTER INSERT OR UPDATE OR DELETE ON sections
+    FOR EACH STATEMENT EXECUTE FUNCTION bump_version();
+CREATE TRIGGER trigger_default_blocks_version
+    AFTER INSERT OR UPDATE OR DELETE ON default_blocks
+    FOR EACH STATEMENT EXECUTE FUNCTION bump_version();
+CREATE TRIGGER trigger_drop_down_blocks_version
+    AFTER INSERT OR UPDATE OR DELETE ON drop_down_blocks
+    FOR EACH STATEMENT EXECUTE FUNCTION bump_version();
+CREATE TRIGGER trigger_drop_down_elements_version
+    AFTER INSERT OR UPDATE OR DELETE ON drop_down_elements
+    FOR EACH STATEMENT EXECUTE FUNCTION bump_version();
+
+
+
+
 
 -- TODO: тестовые данные, убрать --
 
@@ -151,5 +186,4 @@ VALUES
     (5, 'Submit documents for enrollment', 'To start the enrollment procedure, submit the required documents to the Admission Center (GUK-109).', '', 2),
     (6, 'Dormitory check-in', 'Your dormitory address is stated in the contract.', 'https://istudent.urfu.ru/s/modeus', 1),
     (6, 'Dormitory check-in', 'Your dormitory address is stated in the contract.', 'https://istudent.urfu.ru/s/modeus', 2);
-
 
