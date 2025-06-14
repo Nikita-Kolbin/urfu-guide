@@ -10,7 +10,9 @@ func (r *Repository) GetSections(ctx context.Context, languageCode string) (mode
 	ctx, cancel := context.WithTimeout(ctx, r.timeout)
 	defer cancel()
 
-	query := `SELECT id, language_code, content_type, title, position  FROM sections WHERE language_code = $1 ORDER BY position`
+	query := `
+	SELECT id, language_code, content_type, title, icon, position 
+	FROM sections WHERE language_code = $1 ORDER BY position`
 
 	res := make(model.SectionList, 0)
 

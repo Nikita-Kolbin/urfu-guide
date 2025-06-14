@@ -76,29 +76,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "model.DefaultBlock": {
-            "type": "object",
-            "properties": {
-                "address": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "section_id": {
-                    "type": "integer"
-                },
-                "timetable": {
-                    "type": "string"
-                }
-            }
-        },
         "model.ErrorResponse": {
             "type": "object",
             "properties": {
@@ -135,17 +112,9 @@ const docTemplate = `{
                 "content_type": {
                     "type": "string"
                 },
-                "default_block": {
-                    "$ref": "#/definitions/model.DefaultBlock"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "languageCode": {
+                "data": {},
+                "icon": {
                     "type": "string"
-                },
-                "position": {
-                    "type": "integer"
                 },
                 "title": {
                     "type": "string"
